@@ -6,6 +6,7 @@
     "typechain-target-fuels": "^0.17.0"
   },
   "dependencies": {
+    "@fuel-ts/math": "^0.20.0",
     "fuels": "^0.20.0"
   }
 }
