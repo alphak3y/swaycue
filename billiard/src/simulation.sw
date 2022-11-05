@@ -89,11 +89,11 @@ storage {
 
 impl BilliardTable for Contract {
     #[storage(read, write)]
-    fn init(start_x: u64, start_y: u64, end_x: u64, end_y: u64) -> (U128, U128) {
+    fn init(start_x: u64, start_y: u64) -> (U128, U128) {
         // let mut index = 0;
-        //let point: Point = ~Point::from(obstacle_x_position, obstacle_y_position);
+        //let point: Point = Point::from(obstacle_x_position, obstacle_y_position);
         //storage.obstacles.insert(obstacle_x_position, obstacle_y_position);
-        (~U128::from(0, obstacle_x_position), ~U128::from(0, obstacle_y_position))
+        (U128::from((0, start_x)), U128::from((0, start_y)))
         // while index < obstacle_x_positions.length {
         // }
     }

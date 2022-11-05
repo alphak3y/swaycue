@@ -5,7 +5,7 @@ Static obstacles on the billiard table.
 // library obstacles;
 
 // pub fn linspace(start: Q64x64, stop: Q64x64, num: u32, endpoint: bool) -> Vec<Q64x64> {
-//     let mut vec: Vec<Q64x64> = ~Vec::new();
+//     let mut vec: Vec<Q64x64> = Vec::new();
 
 //     let num = Q64x64::from(num);
 //     let step_size = (stop - start) / num;

@@ -45,12 +45,12 @@
     {
       "inputs": [
         {
-          "name": "obstacle_x_position",
+          "name": "start_x",
           "type": 2,
           "typeArguments": null
         },
         {
-          "name": "obstacle_y_position",
+          "name": "start_y",
           "type": 2,
           "typeArguments": null
         }
