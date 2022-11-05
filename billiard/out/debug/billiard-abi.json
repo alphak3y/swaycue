@@ -1,0 +1,67 @@
+{
+  "types": [
+    {
+      "typeId": 0,
+      "type": "(_, _)",
+      "components": [
+        {
+          "name": "__tuple_element",
+          "type": 1,
+          "typeArguments": null
+        },
+        {
+          "name": "__tuple_element",
+          "type": 1,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 1,
+      "type": "struct U128",
+      "components": [
+        {
+          "name": "upper",
+          "type": 2,
+          "typeArguments": null
+        },
+        {
+          "name": "lower",
+          "type": 2,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 2,
+      "type": "u64",
+      "components": null,
+      "typeParameters": null
+    }
+  ],
+  "functions": [
+    {
+      "inputs": [
+        {
+          "name": "obstacle_x_position",
+          "type": 2,
+          "typeArguments": null
+        },
+        {
+          "name": "obstacle_y_position",
+          "type": 2,
+          "typeArguments": null
+        }
+      ],
+      "name": "init",
+      "output": {
+        "name": "",
+        "type": 0,
+        "typeArguments": null
+      }
+    }
+  ],
+  "loggedTypes": []
+}

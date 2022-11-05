@@ -1,0 +1,9 @@
+[project]
+authors = ["alphak3y"]
+entry = "simulation.sw"
+license = "GPL-3.0"
+name = "billiard"
+
+[dependencies]
+billiard_libs = { path = "../libraries/" }
+

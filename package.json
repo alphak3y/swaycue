@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "fuelchain": "^0.17.0",
+    "typechain": "^8.1.1",
+    "typechain-target-fuels": "^0.17.0"
+  },
+  "dependencies": {
+    "fuels": "^0.20.0"
+  }
+}
