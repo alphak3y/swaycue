@@ -26,7 +26,7 @@ impl Disk {
     fn collide(self, position: Vector, ref mut velocity: Vector, radius: U128) -> Vector {
         let i128_one = I128::from(1);
         let mut vector = Vector::new();
-        let (velocity_1, velocity_2) = elastic_collision(self.center, position, U128::from((0,1)), U128::from((0,0)), vector, velocity);
+        let (velocity_1, velocity_2) = elastic_collision(self.center, position, vector, velocity, U128::from((0,1)), U128::from((0,0)));
         velocity_2
     }
 }

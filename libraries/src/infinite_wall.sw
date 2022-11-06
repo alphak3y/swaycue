@@ -12,7 +12,7 @@ pub struct InfiniteWall {
 }
 
 impl InfiniteWall {
-    fn init(self, start_point: Vector, end_point: Vector, is_left_side: bool) -> Self {
+    fn from(start_point: Vector, end_point: Vector, is_left_side: bool) -> Self {
         
         let diff = end_point - start_point;
 
@@ -30,7 +30,7 @@ impl InfiniteWall {
         }
     }
 
-    fn calc_time_of_impact(self, position: Vector, velocity: Vector, radius: U128) -> U128 {
+    fn calc_time_of_impact_wall(self, position: Vector, velocity: Vector, radius: U128) -> U128 {
 
         let i128_zero = I128::from(0);
         let headway = velocity.dot(self.normal).flip();

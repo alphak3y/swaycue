@@ -47,7 +47,7 @@ pub fn time_of_impact(position_1: Vector, position_2: Vector, velocity_1: Vector
     ret.abs()
 }
 
-pub fn elastic_collision(position_1: Vector, position_2: Vector, mass_1: U128, mass_2: U128, ref mut velocity_1: Vector, ref mut velocity_2: Vector) -> (Vector, Vector) {
+pub fn elastic_collision(position_1: Vector, position_2: Vector, ref mut velocity_1: Vector, ref mut velocity_2: Vector, mass_1: U128, mass_2: U128) -> (Vector, Vector) {
     let mass_1 = I128::from_u128(mass_1);
     let mass_2 = I128::from_u128(mass_2);
 
