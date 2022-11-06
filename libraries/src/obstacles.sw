@@ -2,32 +2,54 @@
 Static obstacles on the billiard table.
 */
 //@dev everything is scaled up w/ 18 decimal precision
-// library obstacles;
+library obstacles;
 
-// pub fn linspace(start: Q64x64, stop: Q64x64, num: u32, endpoint: bool) -> Vec<Q64x64> {
-//     let mut vec: Vec<Q64x64> = Vec::new();
+use std::u128::*;
+use ::trig::*;
+use ::vector::*;
+use ::I128::*;
 
-//     let num = Q64x64::from(num);
-//     let step_size = (stop - start) / num;
-//     let mut step = start;
+pub fn linspace(start: U128, stop: U128, num: u32, endpoint: bool) -> Vec<U128> {
+    let mut vec: Vec<U128> = Vec::new();
 
-//     while step < stop {
-//         vec.push(step);
-//         step += step_size;
-//     }
+    let num = U128::from((0,num));
+    let step_size = (stop - start) / num;
+    let mut step = start;
 
-//     if endpoint {
-//         vec.push(stop);
-//     }
+    while step < stop {
+        vec.push(step);
+        step += step_size;
+    }
+
+    if endpoint {
+        vec.push(stop);
+    }
     
-//     vec
-// }
+    vec
+}
 
-// pub fn circle_model(radius: u64, ref mut num_points: u8){
-//     //default value for num_points
-//     if num_points == 0 { num_points = 32 }
+pub fn circle_model(radius: I128, ref mut num_points: u8) -> (Vec<Vector>, Vec<u64>) {
+    //default value for num_points
+    if num_points == 0 { num_points = 32 }
 
-//     angles = linspace(0, 2*pi(), num_points, false);
+    // vertices on the circle
+    let mut angles = linspace(U128::from((0,0)), two_pi(), num_points, false);
+    let mut vertices = Vec::new();
+    let mut index = 0;
+    while index < num_points {
+        let mut angle = angles.get(index).unwrap();
+        vertices.push(Vector::from(cos(angle) * radius, sin(angle) * radius));
+        num_points += 1;
+    }
 
-//     xy = (cos(angles), sin(angles))
-// }
+    // indices for drawing lines
+    let mut indices = Vec::new();
+    index = 0;
+    while index < num_points {
+        indices.push(index);
+        indices.push(index + 1);
+    }
+    indices.insert(index - 1, 0);
+
+    (vertices, indices)
+}
