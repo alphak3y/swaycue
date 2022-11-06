@@ -19,7 +19,6 @@ pub trait From {
 impl I128 {
     /// Helper function to get a signed number from with an underlying
     fn from_u128(underlying: U128) -> Self {
-        assert(underlying.upper & 0x8000000000000000 == 0);
         Self { underlying }
     }
 }
@@ -137,21 +136,15 @@ impl core::ops::Multiply for I128 {
     /// Multiply a I128 with a I128. Panics of overflow.
     fn multiply(self, other: Self) -> Self {
         let mut res = Self::new();
-        if (self.underlying > Self::indent() || self.underlying == Self::indent())
-            && (other.underlying > Self::indent() || other.underlying == Self::indent())
-        {
+        let self_ge_zero: bool = self.underlying > Self::indent() || self.underlying == Self::indent();
+        let other_ge_zero: bool = other.underlying > Self::indent() || other.underlying > Self::indent();
+        if self_ge_zero && other_ge_zero {
             res = Self::from_u128((self.underlying - Self::indent()) * (other.underlying - Self::indent()) + Self::indent());
-        } else if self.underlying < Self::indent()
-            && other.underlying < Self::indent()
-        {
+        } else if !self_ge_zero && !other_ge_zero {
             res = Self::from_u128((Self::indent() - self.underlying) * (Self::indent() - other.underlying) + Self::indent());
-        } else if self.underlying > Self::indent() || self.underlying == Self::indent()
-            && other.underlying < Self::indent()
-        {
+        } else if self_ge_zero && !other_ge_zero {
             res = Self::from_u128(Self::indent() - (self.underlying - Self::indent()) * (Self::indent() - other.underlying));
-        } else if self.underlying < Self::indent()
-            && (other.underlying > Self::indent() || other.underlying == Self::indent())
-        {
+        } else if !self_ge_zero && other_ge_zero {
             res = Self::from_u128(Self::indent() - (other.underlying - Self::indent()) * (Self::indent() - self.underlying));
         }
 
