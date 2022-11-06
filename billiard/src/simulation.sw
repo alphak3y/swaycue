@@ -1,5 +1,8 @@
 contract;
 
+dep billiard_libs::point;
+
+use billiard_libs::point::*;
 use core::num::*;
 use std::{
     u128::*,
@@ -10,26 +13,6 @@ use std::{
 pub struct Obstacle {
     start_point: Point,
     end_point: Point,
-}
-
-pub struct Point {
-    x_position: U128,
-    y_position: U128,
-}
-
-pub trait From {
-    /// Function for creating I24 from u32
-    fn from(x_position: U128, y_position: U128) -> Self;
-}
-
-impl Point {
-    /// Helper function to get a signed number from with an underlying
-    pub fn from(x_position: U128, y_position: U128) -> Self {
-        Self { 
-            x_position,
-            y_position,
-         }
-    }
 }
 
 //only owner should be able to call all functions

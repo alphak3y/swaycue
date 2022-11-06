@@ -1,8 +1,6 @@
 library point;
 
-dep I128;
-
-use I128::*;
+use ::I128::*;
 
 pub struct Point {
     x_position: I128,
@@ -22,4 +20,14 @@ impl Point {
             y_position,
          }
     }
-}           
+}
+
+impl core::ops::Subtract for Point {
+    /// Subtract a I128 from a I128. Panics of overflow.
+    fn subtract(self, other: Self) -> Self {
+        Self {
+            x_position: self.x_position - other.x_position,
+            y_position: self.y_position - other.y_position
+        }
+    }
+}
