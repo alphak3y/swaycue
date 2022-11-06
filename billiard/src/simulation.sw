@@ -1,8 +1,7 @@
 contract;
 
-dep billiard_libs::point;
-
-use billiard_libs::point::*;
+use billiard_libs::infinite_wall::*;
+use billiard_libs::vector::*;
 use core::num::*;
 use std::{
     u128::*,
@@ -10,16 +9,11 @@ use std::{
     storage::StorageMap,
 };
 
-pub struct Obstacle {
-    start_point: Point,
-    end_point: Point,
-}
-
 //only owner should be able to call all functions
 abi BilliardTable {
     // Core functions
     #[storage(read, write)]
-    fn init(obstacle_x_positions: u64, obstacle_y_positions: u64) -> (U128, U128);
+    fn add_wall(start_x: u64, start_y: u64, end_x: u64, end_y: u64) -> u64;
 
     // // returns idx where the ball is stored
     // #[storage(read, write)]
@@ -53,30 +47,31 @@ abi BilliardTable {
 // Should be all storage variables
 storage { 
 
-    time: u64 = 0,
+    time: U128 = U128::from((0,0)),
     
-    // ball_count: u8 = 0,
-    // ball_positions: u32 = 10, // implicitly a u24
+    ball_count: u8 = 0,
+    ball_positions: StorageMap<u8, Vector> = StorageMap {}, // implicitly a u24
     // ball_velocities: u32 = 2500,
-    // ball_radii:
-    // ball_masses:
+    ball_radii: StorageMap<u8, U128> = StorageMap {},
+    ball_masses: StorageMap<u8, U128> = StorageMap {},
 
-    // time_of_impact_table //lower triangular matrix of next impacts
-    // time_of_impact_min //time-index pairs for the next collision for each ball
+    time_of_impact_table: StorageMap<u8, Vec<U128>> = StorageMap{}, //lower triangular matrix of next impacts
+    // time_of_impact_min:  //time-index pairs for the next collision for each ball
     // time_of_impact_next //time-index-index for next collision
 
-    obstacles: StorageMap<u8, Obstacle> = StorageMap {}, // list of all obstacles
+    obstacles: StorageMap<u8, InfiniteWall> = StorageMap {}, // list of all obstacles
     // obstacles_time_of_impact // time-obstacle pairs for each ball
     // obstacle_next //time-index-obstacle pair of the next obstacle
 }
 
 impl BilliardTable for Contract {
     #[storage(read, write)]
-    fn init(start_x: u64, start_y: u64) -> (U128, U128) {
+    fn add_wall(start_x: u64, start_y: u64, end_x: u64, end_y: u64) -> u64 {
         // let mut index = 0;
         //let point: Point = Point::from(obstacle_x_position, obstacle_y_position);
         //storage.obstacles.insert(obstacle_x_position, obstacle_y_position);
-        (U128::from((0, start_x)), U128::from((0, start_y)))
+        
+        start_x
         // while index < obstacle_x_positions.length {
         // }
     }
