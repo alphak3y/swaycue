@@ -26,10 +26,26 @@ impl Vector {
         self.x * other.x +
         self.y * other.y
     }
+    pub fn times(self, value: I128) -> Self {
+        Self {
+            x: self.x * value,
+            y: self.y * value
+        }
+    }
+}
+
+impl core::ops::Add for Vector {
+    /// Add a I128 to a I128.
+    fn add(self, other: Self) -> Self {
+        Self {
+            x: self.x + other.x,
+            y: self.y + other.y
+        }
+    }
 }
 
 impl core::ops::Subtract for Vector {
-    /// Subtract a I128 from a I128. Panics of overflow.
+    /// Subtract a I128 from a I128.
     fn subtract(self, other: Self) -> Self {
         Self {
             x: self.x - other.x,

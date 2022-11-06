@@ -17,6 +17,11 @@ pub trait From {
 }
     
 impl I128 {
+    fn from(value: u64) -> Self {
+        Self {
+            underlying: U128::from((0,value))
+        }
+    }
     /// Helper function to get a signed number from with an underlying
     fn from_u128(underlying: U128) -> Self {
         Self { underlying }
@@ -47,6 +52,10 @@ impl I128 {
         // I128 required values are from (-2 ^ 127) to (2 ^ 127) - 1
         // So zero value must be 8,388,608 to cover the full range
         U128::from((0x8000000000000000, 0x0000000000000000))
+    }
+
+    pub fn zero() -> I128 {
+        I128::from(0)
     }
 }
 
@@ -184,5 +193,13 @@ impl core::ops::Divide for I128 {
 impl core::ops::Mod for I128{
     fn modulo(self, other: I128) -> I128 {
         return (self - other * (self / other));
+    }
+}
+
+impl I128 {
+    pub fn flip(self) -> Self {
+        self * Self {
+            underlying: Self::indent() - self.underlying,
+        }
     }
 }
